@@ -27,11 +27,10 @@ export default {
     return {
       email: '',
       error: false,
-      password: null
     }
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['verifyuser']),
     validate () {
       if (this.email) {
         this.error = !validateEmail(this.email)
@@ -43,7 +42,7 @@ export default {
     async submitLogin () {
       this.validate()
       try {
-        await this.login({ email: this.email, password: this.password })
+        await this.verifyuser({ email: this.email })
       } catch (error) {
         this.error = true
       }

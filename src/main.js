@@ -1,11 +1,14 @@
 import './assets/global.scss'
 
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import store from './stores'
 
 import App from './App.vue'
 import router from './router'
+
+import 'font-awesome/css/font-awesome.css';
 
 // вывод UI компонентов
 import components from '@/components/UI'

@@ -25,17 +25,19 @@ export default {
     needToActivate: state => state.needToActivate
   },
   actions: {
-    async login ({ commit }, authData) {
+    async verifyuser ({ commit }, authData) {
       try {
         commit('SET_EMAIL', authData.email)
-        const response = await axios.post('auth/login', authData)
+        const response = await axios.get('auth/verifyuser', {
+          params: authData
+        })
         const { needToActivate } = response.data
         commit('SET_needToActivate', needToActivate)
 
         if (needToActivate) {
           router.push('/create-password')
         } else {
-          router.push('/verify-password ')
+          router.push('/verify-password')
         }
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'Ошибка при регистрации'

@@ -1,10 +1,10 @@
 import { createStore } from 'vuex'
 // import info from './modules/info'
-import login from './modules/login'
+import verifyuser from './modules/verifyuser'
 
 export default createStore({
 
   modules: {
-    login,
+    verifyuser,
   }
 })

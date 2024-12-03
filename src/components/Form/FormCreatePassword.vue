@@ -6,15 +6,14 @@
         <ui-input type="password" v-model="password" required :error="error" autocomplete="current-password"
           @input="clear_error" />
       </div>
-      <div class="password-strength">
+      <div class="password-strength" :class="{success: !is_invalid}">
         <div class="password-box">
-          <v-icon :class="`text-${strength.length ? 'success' : 'muted'}`">
-            {{ strength.length ? 'mdi-check' : 'mdi-close' }}
-          </v-icon>
-          <p :class="`title-${strength.length ? 'success' : 'muted'}`">Хотя бы 8 символов</p>
+          <i :class="['fa', 'fa-check', strength.length ? 'password-success' : 'password-muted']"></i>
+          <p :class="['text-password', strength.length ? 'text-success' : 'text-muted']">Хотя бы 8 символов</p>
         </div>
         <div class="password-box">
-          <p :class="`title-${strength.uc_char ? 'success' : 'muted'}`">Хотя бы одну заглавную букву</p>
+          <i :class="['fa', 'fa-check', strength.uc_char ? 'password-success' : 'password-muted']"></i>
+          <p :class="['text-password', strength.uc_char ? 'text-success' : 'text-muted']">Хотя бы одну заглавную букву</p>
         </div>
       </div>
       <div class="auth-button">

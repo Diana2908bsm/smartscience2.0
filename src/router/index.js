@@ -16,8 +16,8 @@ const router = createRouter({
     },
     {
       path: '/verify-password',
-      name: 'verifyPassword',
-      component: () => import('../views/VerifyPassword.vue')
+      name: 'VerifyPassword',
+      component: () => import('@/views/VerifyPassword.vue')
     },
     {
       path: '/create-password',
