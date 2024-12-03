@@ -1,0 +1,7 @@
+export { default as mainLogo } from './mainLogo.vue'
+export { default as headerPerson } from './headerPerson.vue'
+export { default as personSetting } from './personSetting.vue'
+export { default as enterIcons } from './enterIcons.vue'
+export { default as editUser } from './editUser.vue'
+export { default as deleteUser } from './deleteUser.vue'
+export { default as emailIcon } from './emailIcon.vue'

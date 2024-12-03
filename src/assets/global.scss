@@ -1,0 +1,738 @@
+// ----------fonts----------------------------
+@font-face {
+	font-family: 'Golos-Text';
+	src: 
+		url('../components/fonts/golos-text_regular.woff2') format('woff2'),
+		url('../components/fonts/golos-text_regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Golos-Text';
+	src: 
+		url('../components/fonts/golos-text_medium.woff2') format('woff2'),
+		url('../components/fonts/golos-text_medium.woff') format('woff');
+	font-weight: 500;
+
+}
+
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,progress,video{display:inline-block;vertical-align:baseline}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+a{background:transparent}
+a:active,a:hover{outline:0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+h1{font-size:2em;margin:0.67em 0}
+mark{background:#ff0;color:#000}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-0.5em}
+sub{bottom:-0.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:1em 40px}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+pre{overflow:auto}
+code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}
+button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
+button{overflow:visible}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+input{line-height:normal}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em}
+legend{border:0;padding:0}
+textarea{overflow:auto}
+optgroup{font-weight:bold}
+table{border-collapse:collapse;border-spacing:0}
+td,th{padding:0}
+*, ::after, ::before {
+	box-sizing: border-box;
+}
+a {
+	text-decoration: none;
+}
+input {
+	all: unset; 
+	box-sizing: border-box; 
+  }
+input[type="text"] {
+	font-family: inherit; /* 1 */
+	font-size: inherit; /* 1 */
+	line-height: inherit; /* 1 */
+	margin: 0; /* 2 */
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+button {
+    all: unset; 
+    /* Затем добавляем свои стили */
+    display: inline-block;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit; 
+    color: inherit; 
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+h1{
+  margin: 0;
+}
+body{
+	font-family: 'Golos-Text';
+	width: 100%;
+}
+#app{
+	height: 100%;
+}
+// ----------color--------------------------
+$primary-color: #95A7FF;
+$black-color: #000;
+$white-color: #fff;
+$grey-color: #2E2E2E;
+$blue-color: #0D4CD3;
+$lightgrey-color: #D9D9D9;
+$stroke-color: #484340;
+$header-color: #95A7FF;
+$bg-color:#F3F5F7;
+// -----------ui---------------------
+.v-button {
+	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	padding: 0;
+ 
+}
+.btn-primary {
+	background:$blue-color ;
+	color: $white-color;
+}
+.btn-lg {
+	font-size: 22px;
+	width: 100%;
+    height: 56px;
+	border-radius: 8px;
+}
+button[disabled]{
+	opacity: 0.5;
+}
+.error{
+	color: red;
+}
+//--------------auth--------------------
+.auth {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	padding: 0 15px;
+	background: url(../assets/bg.jpg) no-repeat center;
+	background-size: cover;
+  
+	&__wrapper {
+	  background: $lightgrey-color;
+	  padding: 25px 35px;
+	  max-width: 400px;
+      width: 100%;
+	  border-radius: 8px;
+	  box-shadow: 0px 24px 48px 0px rgb(8, 8, 8);
+	  text-align: center;
+	}
+	&__box {
+		display: flex;
+        justify-content: space-between;
+	}
+	&__email-box{
+		padding: 5px;
+		margin: 5px 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		span{
+
+		}
+		svg{
+			width: 24px;
+		}
+	}
+
+	&__logo{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		span {
+			font-size: 14px;
+		}
+	}
+	&__title{
+		font-size: 22px;
+        font-weight: 700;
+        line-height: 36px;
+		padding: 15px 0;
+		color:$grey-color ;
+	}
+	&__register{
+		margin-top: 15px;
+		font-size: 12px;
+	} 
+	&__register a {
+		color: $blue-color;
+	}
+}
+
+.auth-button{
+	margin: 15px 0;
+}
+.input-field{
+	text-align: left;
+	padding: 10px 0;
+	position: relative;
+	input{
+		width: 100%;
+		box-sizing: border-box;
+		display: block;
+		font-size: 18px;
+		border: 1px solid $stroke-color;
+        border-radius: 8px;
+        background: $lightgrey-color;
+		padding: 0.775rem 0.55rem;
+	}
+	label {
+		font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+		color: $stroke-color;
+	}
+	span{
+		color: red;
+		font-size: 12px;
+	}
+	a{
+		font-size: 12px;
+		margin-right: 0;
+		text-decoration: none;
+		color: $stroke-color;
+		display:inline-flex;
+		justify-content: end;
+	}
+}
+.input-field.error {
+   label{
+	color: red;
+   }
+	input {
+		border: 1px solid red;
+	}
+}
+//--------------register--------------------
+.register {
+	&__title {
+		font-size: 22px;
+        font-weight: 700;
+        line-height: 36px;
+		padding: 20px 0;
+		color:$grey-color ;
+	}
+	&__wrapper{
+		background: #D9D9D9;
+		padding: 25px 50px;
+		max-width: 770px;
+		width: 100%;
+		border-radius: 8px;
+		box-shadow: 0px 24px 48px 0px rgb(8, 8, 8);
+		text-align: center;
+	}
+	&__grid{
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 30px;
+	}
+	&__button{
+		
+		margin: 0 auto;
+		margin-top: 3em;
+	}
+}
+.register-btn {
+	font-size: 12px;
+	margin-top: 1.5rem;
+	color: $blue-color;
+}
+@media(max-width:540px){
+	.register{
+		&__grid {
+		    grid-template-columns: auto;
+		}
+		&__button{
+		    width: 100%;
+	    }
+		&__wrapper{
+			padding: 25px 20px;
+		}
+	}
+}
+// -------------page-------------
+.page{
+	&__main{
+		max-width: 1630px;
+		margin: 0 auto;	
+	}
+	&__grid{
+		display: grid;
+		grid-template-columns: 300px 1fr;
+	}
+	&__grid--work{
+		grid-template-columns: 300px 1fr 250px;
+	}
+}
+@media(max-width:990px){
+	.page{
+		&__navbar{
+		    display: none;
+		}
+		&__grid{
+			display: block;
+		}
+	}
+}
+// ---------header--------------
+.header{
+	background: $header-color;
+	height: 80px;
+	padding: 0 15px;
+	border-bottom: 1px solid #3e5efc;
+
+	&__container{
+		max-width: 1630px;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+	
+	&__column {
+		display: flex;
+		justify-content:space-between;
+		align-items: center;
+	}
+	&__item {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+	}
+	&__name{
+		font-size: 22px;
+	}
+	&__person-name{
+		color: $white-color;
+		font-size: 18px;
+	}
+	&__enter{
+		cursor: pointer;
+	}
+}
+.burger-menu{
+	display: none;
+}
+@media(max-width:990px){
+	.burger-menu{
+		display: block;
+	}
+	.burger-navbar{
+        position: absolute;
+        z-index: 11;
+        left: 0;
+        right: 0;
+	}
+	.burger-navbar .navbar{
+		border-radius: 15px;
+	}
+}
+// --------------navbar-----------------------
+.navbar {
+	height: 100vh;
+	background:$bg-color ;
+	&__links{
+		list-style-type:none;
+		margin: 0;
+		padding: 0px 24px 16px 16px;
+	}
+	&__item{
+		
+		padding-top: 30px;
+		&last-child {
+			padding-bottom: 30px;
+		}
+	}
+	&__link{
+		display: inline-flex;
+		width: 100%;
+		text-decoration: none;
+		font-size: 18px;
+		padding: 6px 0 6px 16px;
+		color:$black-color;
+	}
+}
+.router-link-exact-active.navbar__link{
+	background: $header-color;
+    border-radius: 5px;
+}
+.router-link-exact-active.profile__setting {
+	padding-bottom: 5px;
+	border-bottom: 2px solid $blue-color;
+}
+// ----------------profile--------------------------
+.profile{
+	&__container{
+		padding: 20px 16px 0 28px;
+	}
+	&__column{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__title{
+		font-size: 24px;
+    margin: 0  0 15px 0;
+	}
+	&__setting{
+		display: flex;
+		align-items: center;
+		gap:5px;
+		span {
+			color:$blue-color ;
+		}
+	}
+	&__subtitle{
+		font-size: 18px;
+		color:$grey-color ;
+	}
+}
+// ---------------info---------------------
+.info {
+	&__container{
+		width: 100%;
+		border: 1px solid $lightgrey-color;
+        border-radius: 25px;
+		padding: 15px;
+		background: $bg-color;
+        box-shadow: 0px 7px 4px 0px rgba(0, 0, 0, 0.1);
+	}
+	&__header{
+		display:flex;
+		justify-content: space-between;
+		margin-bottom: 20px;
+	}
+	&__edit{
+		font-size: 12px;
+		color: $blue-color;
+		button{
+			border: none;
+			background: inherit;
+		}
+	}
+	&__header--name{
+		font-size: 20px;
+		font-weight: bold;
+		color:$black-color;
+	}
+	&__name{
+		color: $stroke-color;
+		font-size: 14px;
+	}
+	&__title{
+		color:$black-color ;
+		font-size: 14px;
+	}
+	&__item{
+		padding: 10px 0;
+		display: flex;
+		gap:5px;
+	}
+}
+// --------------articles-----------------------
+.articles{
+	margin-top: 20px;
+	&__list{
+		list-style-type:none;
+		padding: 0;
+	}
+	&__title {
+		font-size: 18px;
+		color:$blue-color;
+	}
+	&__item{
+		box-shadow: 0px 7px 4px 0px rgba(0, 0, 0, 0.1);
+		border: 1px solid rgb(217, 217, 217);
+		border-radius: 15px;
+		padding: 15px;
+		background: $bg-color;
+		margin-bottom: 15px;
+	}
+	&__name {
+		font-size: 14px;
+	}
+	&__text {
+		font-size: 14px;
+		color:$stroke-color;
+	}
+
+}
+// --------------filters-----------------------
+.filter{
+	margin: 20px;
+	&__box{
+		margin: 15px 0;
+	}
+	&__item{
+		background: $bg-color;
+		border-radius: 10px;
+		padding: 10px;
+        box-shadow: 0px 7px 4px 0px rgba(0, 0, 0, 0.1);
+	}
+	&__header{
+		display: flex;
+		justify-content: space-between;
+    padding-bottom: 7px;
+	}
+	&__header--name{
+		font-size: 14px;
+        font-weight: 500;
+		color:$black-color;
+	}
+	&__header--btn{
+		font-size: 12px;
+		color: $stroke-color;
+    cursor: pointer;
+	}
+}
+// --------------users-----------------------
+.users{
+	&__table{
+		border-radius: 16px;
+		box-shadow: 0px 7px 4px 0px rgba(0, 0, 0, 0.1);
+		background: rgb(243, 245, 247);
+		border: 1px solid rgb(217, 217, 217);
+		th{
+			padding: 10px;
+		}
+		td{
+			text-align: center;
+		}
+	}
+	&__header-line{
+		border-bottom: 2px solid $lightgrey-color ;
+	}
+	&__list 
+	   td{
+		padding: 15px 0;
+		border-bottom: 2px solid $lightgrey-color ;
+	}
+	&__btn{
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+		svg{
+			color: #95A7FF;
+		}
+		svg:hover{
+			color: $blue-color;
+			transition: all 0.3s;
+		}
+	}
+}
+// --------------modal-----------------------
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.5);
+	&__overlay{
+		position: absolute;
+		border-radius: 25px;
+		box-shadow: 0px 7px 4px 0px rgba(0, 0, 0, 0.1);
+		background: $bg-color;
+		padding: 25px;
+		max-width: 420px;
+		width: 100%;
+		
+	}
+	&__content{
+		h3{
+			font-size: 20px;
+
+		}
+	}
+	&__savebtn{
+		background: $blue-color;
+		border-radius: 8px;
+		color: $white-color;
+		font-size: 14px;
+		padding: 10px 15px;
+		margin-top: 10px;
+	}
+	&__close{
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		font-size: 20px;
+		color: red;
+	}
+	&__btns{
+		margin-top: 20px;
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		justify-content: center;
+	}
+	&__btn--delete{
+		background: $blue-color;
+		padding: 5px 10px;
+		color: $white-color;
+		border-radius: 5px;
+	}
+	&__form{
+		div{
+			margin: 15px 0;
+		}
+		label{
+			display: block;
+			font-size: 14px;
+		}
+		input{
+			border-bottom: 1px solid $blue-color;
+			width: 100%;
+		}
+	}
+  }
+// -------------select--------------------------
+.vs__clear{
+	display: none;
+}
+.vs1__listbox{
+
+}
+.vs__dropdown-menu{
+	overflow: hidden!important;
+	font-size: 11px!important;
+}
+.vs__dropdown-menu li{
+	padding: 3px 0;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+.vs__selected {
+	font-size: 12px;
+}
+.register__box .vs__search {
+	display: none;
+}
+.register__box .vs__dropdown-toggle {
+	height: 48px;
+	border: 1px solid #484340;
+	border-radius: 8px;
+
+}
+.register__box .vs__selected{
+	color: $black-color;
+}
+// ---------------invalid---------------------------------
+.invalid {
+	position: relative;
+}
+.invalid input{
+	border: 1px solid red;
+}
+.invalid label{
+	color: red;
+}
+.main__label{
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+// -------------------------vs----------------------------------
+.vs__actions {
+	display: none;
+}
+// -------------------------indicators--------------------------
+.indicators {
+	&__inner {
+	box-shadow: 0 7px 4px 0 rgba(0, 0, 0, 0.1);
+    background: $bg-color;
+	border-radius: 15px;
+    padding: 15px;
+	margin-bottom: 20px;
+	}
+	&__title {
+		font-size: 20px;
+		font-weight: 500;
+		padding: 10px 0;
+	}
+
+	&__table {
+		border-top: 1px solid $blue-color;
+		td {
+			width: 33%;
+			color:$stroke-color;
+			font-size: 14px;
+			padding: 7px 0;
+			text-align: center;
+		}
+	}
+	&__number{
+		color:$blue-color!important ;
+	}
+	&__line{
+		border-bottom: 1px solid $blue-color;
+		line-height: 2;
+	}
+}
+// -------------fa-icons---------------------------------
+.fa-check{
+	color: $blue-color;
+	font-size: 18px;
+}
+.fa-fas{
+	color:red;
+	font-size: 18px;
+}
+
