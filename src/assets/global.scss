@@ -263,9 +263,15 @@ button[disabled]{
 	border: 1px solid #484340;
 	padding:5px 10px;
 }
+.password-strength p{
+	font-size: 14px;
+	margin: 5px 0;
+}
+
 .password-box{
 	display: flex;
     align-items: center;
+	gap: 5px;
 }
 .text-password {
 	color: #484340;

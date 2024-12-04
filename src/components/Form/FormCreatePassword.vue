@@ -7,13 +7,22 @@
           @input="clear_error" />
       </div>
       <div class="password-strength" :class="{success: !is_invalid}">
+        <p>Пароль должен содержать:</p>
         <div class="password-box">
           <i :class="['fa', 'fa-check', strength.length ? 'password-success' : 'password-muted']"></i>
-          <p :class="['text-password', strength.length ? 'text-success' : 'text-muted']">Хотя бы 8 символов</p>
+          <p :class="['text-password', strength.length ? 'text-success' : 'text-muted']">8 символов</p>
+        </div>
+        <div class="password-box">
+          <i :class="['fa', 'fa-check', strength.number ? 'password-success' : 'password-muted']"></i>
+          <p :class="['text-password', strength.number? 'text-success' : 'text-muted']">Одну цифру</p>
         </div>
         <div class="password-box">
           <i :class="['fa', 'fa-check', strength.uc_char ? 'password-success' : 'password-muted']"></i>
-          <p :class="['text-password', strength.uc_char ? 'text-success' : 'text-muted']">Хотя бы одну заглавную букву</p>
+          <p :class="['text-password', strength.uc_char ? 'text-success' : 'text-muted']">Одну заглавную букву</p>
+        </div>
+        <div class="password-box">
+          <i :class="['fa', 'fa-check', strength.special_char ? 'password-success' : 'password-muted']"></i>
+          <p :class="['text-password', strength.special_char ? 'text-success' : 'text-muted']">Неалфавитные символы(!? и т.д)</p>
         </div>
       </div>
       <div class="auth-button">
@@ -48,7 +57,9 @@ export default {
     strength () {
       return {
         length: this.password.length >= 8,
-        uc_char: this.password.toLowerCase() !== this.password
+        uc_char: this.password.toLowerCase() !== this.password,
+        number: /d/.test(this.password),
+        special_char: /[!@#$%^&*(),.?":{}|<>]/.test(this.password)
       }
     },
     errors () {
