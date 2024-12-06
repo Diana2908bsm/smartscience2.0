@@ -6,7 +6,7 @@ export default {
   state: {
     needToActivate: null,
     errorMessage: '',
-    email: ''
+    email: localStorage.getItem('email') || ''
   },
   mutations: {
     SET_ERROR_MESSAGE (state, message) {
@@ -14,6 +14,7 @@ export default {
     },
     SET_EMAIL (state, email) {
       state.email = email
+      localStorage.setItem('email', email);
     },
     SET_needToActivate (state, needToActivate) {
       state.needToActivate = needToActivate
@@ -42,7 +43,6 @@ export default {
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'Ошибка при регистрации'
         commit('SET_ERROR_MESSAGE', errorMessage)
-        console.log(errorMessage)
       }
     }
   }

@@ -25,8 +25,10 @@
       manyIcon,
       FormPassword
     },
-    computed: {
-      ...mapGetters(['email'])
+    data() {
+      return {
+        email: localStorage.getItem('email') || '' 
+      }
     }
   }
   </script>

@@ -288,6 +288,23 @@ button[disabled]{
 .password-strength.success{
     border: 1px solid #0D4CD3;
 }
+.input-eye{
+	position: relative;
+}
+.input-eye input{
+	padding: 0.775rem 2.55rem 0.775rem 0.55rem;
+}
+.icon-eye{
+	position: absolute;
+    right: 10px;
+    font-size: 25px!important;
+	color:$stroke-color ;
+    bottom: 22px;
+}
+.recover-password {
+	font-size: 14px;
+	color:$stroke-color ;
+}
 // -------------page-------------
 .page{
 	&__main{

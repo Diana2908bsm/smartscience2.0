@@ -27,6 +27,7 @@ export default {
     return {
       email: '',
       error: false,
+      password: ''
     }
   },
   methods: {
@@ -37,7 +38,8 @@ export default {
       }
     },
     clear_error () {
-      this.error = false
+      this.error = false,
+      this.$store.commit('SET_ERROR_MESSAGE', '');
     },
     async submitLogin () {
       this.validate()
