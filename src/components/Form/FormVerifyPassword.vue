@@ -47,11 +47,7 @@ export default {
       }
     }
   },
-  watch: {
-    password() {
-      this.clear_error();
-    },
-  },
+
   computed: {
     can_continue() {
       return !this.apiErrorMessage && this.password.length >= 3

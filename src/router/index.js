@@ -8,6 +8,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: { requiresAuth: true }// для этой страницы необходимо залогиниться
     },
     {
       path: '/login',
@@ -27,5 +28,12 @@ const router = createRouter({
 
   ],
 })
-
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('token'); 
+  if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) { 
+    next('/login'); 
+  } else {
+    next();
+  }
+});
 export default router
