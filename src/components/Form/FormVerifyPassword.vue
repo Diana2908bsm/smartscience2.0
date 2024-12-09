@@ -12,7 +12,7 @@
       <router-link to="/auth/recover-password" class="recover-password">Забыли пароль?</router-link>
     </div>
     <div class="auth-button">
-      <iu-button type="submit" sample="primary" :disabled="!can_continue" size="lg">Войти</iu-button>
+      <iu-button type="submit" sample="primary" :disabled="!can_continue" :loading="loading" size="lg">Войти</iu-button>
     </div>
   </form>
 </template>
@@ -26,7 +26,8 @@ export default {
       password: '',
       error: false,
       email: '',
-      is_eye_opened: false
+      is_eye_opened: false,
+      loading: false
     }
   },
   methods: {
@@ -39,11 +40,15 @@ export default {
       this.is_eye_opened = !this.is_eye_opened;
     },
     async submitVerifyPassword() {
+      this.loading = true
       try {
         await this.login({ password: this.password })
       } catch (e) {
         this.error = true;
         this.$store.commit('login/SET_ERROR_MESSAGE', 'Ошибка при входе');
+      }
+      finally {
+        this.loading = false
       }
     }
   },

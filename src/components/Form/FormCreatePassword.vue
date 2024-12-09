@@ -28,11 +28,8 @@
       </div>
     </div>
     <div class="auth-button">
-      <iu-button type="submit" sample="primary" :disabled="is_invalid" size="lg">Войти</iu-button>
+      <iu-button type="submit" sample="primary" :loading="loading" :disabled="is_invalid" size="lg">Войти</iu-button>
     </div>
-    <!-- <div v-if="errorMessage" class="error">
-        {{ errorMessage }}
-      </div> -->
   </form>
 </template>
 <script>
@@ -44,7 +41,8 @@ export default {
       newPassword: '',
       error: false,
       email: '',
-      is_eye_opened: false
+      is_eye_opened: false,
+      loading: false
     }
   },
   methods: {
@@ -56,7 +54,16 @@ export default {
       this.is_eye_opened = !this.is_eye_opened;
     },
     async submitCreatePassword() {
-      await this.activate({newPassword:this.newPassword})
+      this.loading = true
+      try {
+        await this.activate({newPassword:this.newPassword})
+      } catch (error) {
+        this.error = true
+      }
+      finally {
+        this.loading = false
+      }
+
     }
   },
   computed: {

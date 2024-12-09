@@ -1,5 +1,5 @@
 <template>
-  <button class="v-button btn" :class="[`btn-${sample} btn-${size}`, {loading}]">
+  <button class="v-button btn" :class="[`btn-${sample} btn-${size}`, {loading}]"  :disabled="disabled || loading">
     <slot/>
   </button>
 </template>
@@ -10,8 +10,7 @@ export default {
   props: {
     sample: { type: String, default: 'light' },
     size: { type: String, default: 'md' },
-    icon: String,
-    isabled: Boolean,
+    disabled: Boolean,
     loading: Boolean
   }
 }

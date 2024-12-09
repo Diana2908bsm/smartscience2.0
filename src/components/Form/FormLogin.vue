@@ -12,7 +12,7 @@
     </div>
     <input v-model="password" type="password" autocomplete="current-password" class="d-none" hidden />
     <div class="auth-button">
-      <iu-button type="submit" sample="primary" size="lg" :disabled="!can_continue">Войти</iu-button>
+      <iu-button type="submit" sample="primary" size="lg" :loading="loading" :disabled="!can_continue">Войти</iu-button>
     </div>
     <div v-if="errorMessage" class="error">
       {{ errorMessage }}
@@ -27,7 +27,8 @@ export default {
     return {
       email: '',
       error: false,
-      password: ''
+      password: '',
+      loading: false
     }
   },
   methods: {
@@ -43,10 +44,14 @@ export default {
     },
     async submitLogin () {
       this.validate()
+      this.loading = true
       try {
         await this.verifyuser({ email: this.email })
       } catch (error) {
         this.error = true
+      }
+      finally {
+        this.loading = false
       }
     }
   },
