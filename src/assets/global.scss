@@ -443,6 +443,7 @@ button[disabled]{
 }
 // ---------------info---------------------
 .info {
+	margin-top: 50px;
 	&__container{
 		width: 100%;
 		border: 1px solid $lightgrey-color;

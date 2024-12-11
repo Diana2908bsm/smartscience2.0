@@ -12,6 +12,7 @@
 <script>
 
 export default {
+  name: 'NavBar',
   computed: {
   filteredLinks () {
       const links = [

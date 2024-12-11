@@ -19,7 +19,11 @@ export default {
     SET_USERID(state, userId) {
       state.userId = userId;
     },
-
+    CLEAR_AUTH_DATA(state) {
+      state.token = '';
+      state.refreshToken = '';
+      state.userId = '';
+    }
   },
   getters: {
     apiErrorMessage: state => state.errorMessage,
@@ -44,24 +48,42 @@ export default {
         localStorage.setItem('token', token);
         localStorage.setItem('refreshToken', refreshToken);
 
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+
         router.push('/');
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'Ошибка при регистрации';
         commit('SET_ERROR_MESSAGE', errorMessage);
+        commit('CLEAR_AUTH_DATA');
+        localStorage.clear();
+        router.push('/login')
       }
     },
     async refreshTokens({ state, commit }) {
       try {
         const response = await axios.post('auth/refreshtoken', {
-          refreshToken: state.refreshToken
+          refreshToken: state.refreshToken,
+          jwtToken:state.token
         });
-        const { token, refreshToken } = response.data.tokenInfo;
-        commit('SET_AUTH_TOKENS', { token, refreshToken });
-        localStorage.setItem('token', token);
-        localStorage.setItem('refreshToken', refreshToken);
+        const newToken = response.data;
+        commit('SET_AUTH_TOKENS', { token: newToken, refreshToken: state.refreshToken });
+    
+        localStorage.setItem('token', newToken);
+    
+        axios.defaults.headers.common.Authorization = `Bearer ${newToken}`;
       } catch (error) {
-        console.log(error)
+        console.error('Ошибка обновления токенов:', error);
+        commit('CLEAR_AUTH_DATA');
+        localStorage.clear();
+        router.push('/login');
       }
+    },
+    logout ({ commit }){
+      console.log('Удаление данных из localStorage');
+      commit('CLEAR_AUTH_DATA');
+      localStorage.clear();
+      console.log('Данные после очистки localStorage:', localStorage.getItem('userId'), localStorage.getItem('token'), localStorage.getItem('refreshToken'));
+      router.push('/login');
     }
   },
   namespaced: true
