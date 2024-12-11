@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="burger-navbar">
-      <nav-bar v-if="isMenuOpen" @closeMenu="toggleMenu"></nav-bar>
+      <navbar v-if="isMenuOpen" @closeMenu="toggleMenu"></navbar>
     </div>
   </header>
 </template>
