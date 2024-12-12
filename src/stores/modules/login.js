@@ -32,7 +32,7 @@ export default {
     userId: state => state.userId
   },
   actions: {
-    async login({ commit, rootState }, authData) {
+    async login({ commit, rootState, state }, authData) {
       try {
         const email = rootState.verifyuser.email;
         const response = await axios.post('auth/login', {
@@ -41,15 +41,14 @@ export default {
         });
         const { userId, tokenInfo } = response.data
         const { token, refreshToken } = tokenInfo;
-        commit('SET_AUTH_TOKENS', { token, refreshToken });
-        commit('SET_USERID', userId);
 
         localStorage.setItem('userId', userId);
         localStorage.setItem('token', token);
         localStorage.setItem('refreshToken', refreshToken);
 
+        commit('SET_AUTH_TOKENS', { token, refreshToken });
+        commit('SET_USERID', userId);
         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-
         router.push('/');
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'Ошибка при регистрации';
@@ -79,7 +78,6 @@ export default {
       }
     },
     logout ({ commit }){
-      console.log('Удаление данных из localStorage');
       commit('CLEAR_AUTH_DATA');
       localStorage.clear();
       console.log('Данные после очистки localStorage:', localStorage.getItem('userId'), localStorage.getItem('token'), localStorage.getItem('refreshToken'));

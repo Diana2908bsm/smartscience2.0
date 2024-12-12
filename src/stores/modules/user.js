@@ -23,10 +23,12 @@ export default {
         loading: state => state.loading
     },
     actions: {
-        async getInfo({ commit, state }) {
+        async getInfo({ commit, rootState}) {
+            console.log(rootState.login.userId)
             commit('SET_LOADING', true);
+           
             try {
-                const userResponse = await axios.get(`users/get/${state.userId}`)
+                const userResponse = await axios.get(`users/get/${rootState.login.userId}`)
                 commit('SET_USER', userResponse.data.data)
             } catch (error) {
                 commit('SET_LOADING', false);

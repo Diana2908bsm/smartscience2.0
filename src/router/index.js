@@ -21,9 +21,9 @@ const router = createRouter({
       component: () => import('@/views/VerifyPassword.vue')
     },
     {
-      path: '/create-password',
-      name: 'createPassword',
-      component: () => import('../views/CreatePassword.vue')
+      path: '/works',
+      name: 'WorksView',
+      component: () => import('../views/WorksView.vue')
     }
 
   ],

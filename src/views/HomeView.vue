@@ -49,7 +49,7 @@ export default {
   methods: {
     ...mapActions(['getInfo','login/refreshTokens'])
   },
-  created () {
+  mounted () {
     this.getInfo()
   },
   computed: {
