@@ -3,6 +3,7 @@ import verifyuser from './modules/verifyuser'
 import activatePassword from './modules/activatePassword'
 import login from './modules/login'
 import user from './modules/user'
+import works from './modules/works'
 
 export default createStore({
 
@@ -10,6 +11,7 @@ export default createStore({
     verifyuser,
     login,
     activatePassword,
-    user
+    user,
+    works
   }
 })

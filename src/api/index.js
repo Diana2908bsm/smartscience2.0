@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '../stores';
 
-axios.defaults.baseURL = 'https://breakfast-database-brutal-electricity.trycloudflare.com/api/';
+axios.defaults.baseURL = 'https://stopped-consent-dryer-src.trycloudflare.com/api/';
 axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
 
 // Перехватчик запросов для добавления токена

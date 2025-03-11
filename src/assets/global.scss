@@ -519,13 +519,13 @@ button[disabled] {
 		border-radius: 15px;
 	}
 	.header {
-	    &__name {
-		    display: none;
-	    }
-		&__container{
+		&__name {
+			display: none;
+		}
+		&__container {
 			padding: 0;
 		}
-		&__person-name{
+		&__person-name {
 			font-size: 14px;
 		}
 	}
@@ -590,12 +590,12 @@ button[disabled] {
 	}
 }
 @media (max-width: 990px) {
-	.profile{
+	.profile {
 		font-size: 26px;
-		&__setting span{
+		&__setting span {
 			font-size: 14px;
 		}
-		&__container{
+		&__container {
 			padding: 20px 16px 0 10px;
 		}
 	}
@@ -885,4 +885,42 @@ button[disabled] {
 		line-height: 2;
 	}
 }
+// -------------------------publications-----------------
+.publications {
+	margin-top: 10px;
+	&__length{
+		font-size: 16px;
+		padding: 20px 0;
+	}
+	&__inner{
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	&__box{
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 15px 20px;
+		border-radius: 20px;
+		box-shadow: 0 7px 4px 0 rgba(0, 0, 0, 0.1);
+		background: #f3f5f7;
+	}
+	&__title{
+		font-size: 18px;
+		color: $blue-color;
+	}
+	&__author{
+		font-size: 14px;
+	}
+	&__journal{
+		font-size: 14px;
+		color: $stroke-color;
+	}
+	&__year{
+		font-size: 12px;
+		color: $stroke-color;
+	}
+}
+
 // -------------fa-icons---------------------------------

@@ -24,7 +24,6 @@ export default {
     },
     actions: {
         async getInfo({ commit, rootState}) {
-            console.log(rootState.login.userId)
             commit('SET_LOADING', true);
            
             try {
