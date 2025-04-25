@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: () => import('@/views/HomeView.vue'),
       meta: { requiresAuth: true }// для этой страницы необходимо залогиниться
     },
     {
@@ -29,8 +29,12 @@ const router = createRouter({
       path: '/indicators',
       name: 'IndicatorsView',
       component: () => import('../views/IndicatorsView.vue')
-    }
-
+    },
+    {
+      path: '/create-password',
+      name: 'CreatePasswprd',
+      component: () => import('../views/CreatePassword.vue')
+    },
   ],
 })
 router.beforeEach((to, from, next) => {

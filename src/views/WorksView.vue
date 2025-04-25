@@ -3,7 +3,7 @@
         <div class="page__container">
             <headerPage></headerPage>
             <div class="page__main">
-                <div class="page__grid">
+                <div class="page__grid grid-filter">
                     <div class="page__navbar">
                         <navbar></navbar>
                     </div>
@@ -14,9 +14,12 @@
                             </div>
                             <div class="profile__box">
                                 <spinner v-if="loading"></spinner>
-                                <PublicationsWorks :publications="works"  />
+                                <PublicationsWorks :publications="works" />
                             </div>
                         </div>
+                    </div>
+                    <div class="profile__filter">
+                        <Filter />
                     </div>
                 </div>
             </div>
@@ -26,16 +29,18 @@
 <script>
 import headerPage from '../components/header/HeaderPage.vue'
 import Navbar from '@/components/NavBar/NavBar.vue'
-import { mapActions, mapGetters} from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Spinner from '@/components/UI/spinner/Spinner.vue'
 import PublicationsWorks from '@/components/PublicationsWorks/PublicationsWorks.vue'
+import Filter from '@/components/Filter.vue'
 export default {
-    name:'WorksView',
+    name: 'WorksView',
     components: {
         headerPage,
-        Navbar, 
+        Navbar,
         Spinner,
-        PublicationsWorks
+        PublicationsWorks,
+        Filter
     },
     methods: {
         ...mapActions(['getWorks'])
@@ -43,8 +48,8 @@ export default {
     created() {
         this.getWorks()
     },
-    computed:{
-        ...mapGetters(['works','loading'])
+    computed: {
+        ...mapGetters(['works', 'loading'])
     }
 }
 </script>

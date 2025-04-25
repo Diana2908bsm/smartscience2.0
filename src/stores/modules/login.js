@@ -54,8 +54,6 @@ export default {
         const errorMessage = error.response?.data?.message || 'Ошибка при регистрации';
         commit('SET_ERROR_MESSAGE', errorMessage);
         commit('CLEAR_AUTH_DATA');
-        localStorage.clear();
-        router.push('/login')
       }
     },
     async refreshTokens({ state, commit }) {
@@ -73,8 +71,6 @@ export default {
       } catch (error) {
         console.error('Ошибка обновления токенов:', error);
         commit('CLEAR_AUTH_DATA');
-        localStorage.clear();
-        router.push('/login');
       }
     },
     logout ({ commit }){

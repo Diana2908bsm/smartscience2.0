@@ -1,5 +1,5 @@
 import axios from '@/api'
-
+import router from '@/router'
 export default {
     state: {
         user: {},
@@ -31,6 +31,8 @@ export default {
                 commit('SET_USER', userResponse.data.data)
             } catch (error) {
                 commit('SET_LOADING', false);
+                localStorage.clear();
+                router.push('/login')        
                 console.error('Ошибка при загрузке данных пользователя:', error)
             }
             finally {

@@ -18,7 +18,7 @@
               </div>
               <div class="profile__box">
                 <spinner v-if="loading"></spinner>
-                <infoPerson :info="user" />
+                <infoPerson  :firstName="user.firstName" :lastName="user.lastName" :middleName="user.lastName" :email="user.email" :elibraryId="user.elibraryId" :birthdate="user.birthdate" />
               </div>
             </div>
           </div>

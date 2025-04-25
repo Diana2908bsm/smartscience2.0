@@ -1,4 +1,5 @@
 import axios from "axios";
+import { debounce } from "lodash";
 
 export default {
     state:{
@@ -31,6 +32,14 @@ export default {
             }
 
 
-        }
+        },
+        filterSearch: debounce( async ({commit,rootState},query)=>{
+             try {
+                const { data } = await axios.get(`publications/get?userId=${rootState.login.userId}&Title=${query}`)
+                commit('SET_WORKS', data.data)
+            } catch (error) {
+                console.log('Ошибка при загрузке')
+            }
+        }, 500)
     }
 }
