@@ -733,6 +733,9 @@ button[disabled] {
 		gap: 10px;
 		font-size: 13px;
 	}
+	&__box--checkbox{
+		padding-bottom: 5px;
+	}
 }
 // --------------users-----------------------
 .users {

@@ -56,23 +56,24 @@ export default {
         commit('CLEAR_AUTH_DATA');
       }
     },
-    async refreshTokens({ state, commit }) {
-      try {
-        const response = await axios.post('auth/refreshtoken', {
-          refreshToken: state.refreshToken,
-          jwtToken:state.token
-        });
-        const newToken = response.data;
-        commit('SET_AUTH_TOKENS', { token: newToken, refreshToken: state.refreshToken });
+    // async refreshTokens({ state, commit }) {
+    //   try {
+    //     const response = await axios.post('auth/refreshtoken', {
+    //       refreshToken: state.refreshToken,
+    //       jwtToken:state.token
+    //     });
+    //     const newToken = response.data;
+    //     commit('SET_AUTH_TOKENS', { token: newToken, refreshToken: state.refreshToken });
     
-        localStorage.setItem('token', newToken);
+    //     localStorage.setItem('token', newToken);
     
-        axios.defaults.headers.common.Authorization = `Bearer ${newToken}`;
-      } catch (error) {
-        console.error('Ошибка обновления токенов:', error);
-        commit('CLEAR_AUTH_DATA');
-      }
-    },
+    //     axios.defaults.headers.common.Authorization = `Bearer ${newToken}`;
+    //   } catch (error) {
+    //     console.error('Ошибка обновления токенов:', error);
+    //     router.push('/login') 
+    //     commit('CLEAR_AUTH_DATA');
+    //   }
+    // },
     logout ({ commit }){
       commit('CLEAR_AUTH_DATA');
       localStorage.clear();

@@ -3,7 +3,7 @@ import { debounce } from "lodash";
 
 export default {
     state:{
-        works:{},
+        works:[],
         userId:localStorage.getItem('userId') || '',
         loading: false,
     },
@@ -33,13 +33,20 @@ export default {
 
 
         },
-        filterSearch: debounce( async ({commit,rootState},query)=>{
+         async filterArticles  ({commit,rootState}, {title, years}){
              try {
-                const { data } = await axios.get(`publications/get?userId=${rootState.login.userId}&Title=${query}`)
+                const { data } = await axios.get(`publications/get`,{
+                    params: {
+                        userId: rootState.login.userId,
+                        Title: title,
+                        Years: years.join(',')
+                    }
+                })
                 commit('SET_WORKS', data.data)
             } catch (error) {
                 console.log('Ошибка при загрузке')
             }
-        }, 500)
+        }
     }
 }
+// фильтрацию данных на основе параметров, переданных в URL

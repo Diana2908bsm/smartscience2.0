@@ -13,9 +13,6 @@
       </div>
     </div>
   </div>
-  <pre>
-        {{ publication }}
-    </pre>
 </template>
 <script>
 export default {
