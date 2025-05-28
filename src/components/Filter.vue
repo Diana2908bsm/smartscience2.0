@@ -21,6 +21,9 @@
                 </div>
             </div>
         </div>
+        <div class="filter__box">
+            
+        </div>
     </div>
 </template>
 
