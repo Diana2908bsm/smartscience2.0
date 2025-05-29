@@ -1,25 +1,33 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import router from '@/router'
+import axios from "@/api";
 
-export const useAuthStore = defineStore('auth',{
+export const useAuthStore = defineStore('auth', {
     state: () => ({
-        email:'',
-        userId : '',
+        needToActivate: null,
+        email: '',
+        userId: '',
         refreshToken: '',
         token: '',
-        loading: false ,
-        errorMessage:''
+        loading: false,
+        errorMessage: ''
     }),
     actions: {
         async login(email) {
             console.log(email)
             this.loading = true;
             try {
-                const response = await axios.post('auth/login', {email})
+                const response = await axios.get('auth/verifyuser', { params: { email } })
+
+                this.needToActivate = response.data.needToActivate
                 this.email = email;
+                if (this.needToActivate) {
+                    router.push('/create-password')
+                } else {
+                    router.push('/verify-password')
+                }
             } catch (error) {
-            this.errorMessage = error.message
-            this.errorMessages = error.response.data.message 
+                this.errorMessage = error.response?.data?.message || 'Ошибка при регистрации'
             } finally {
                 this.loading = false;
             }
