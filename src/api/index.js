@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '../stores';
 
-axios.defaults.baseURL = 'https://wines-minister-reject-informational.trycloudflare.com/api/';
+axios.defaults.baseURL = 'https://theft-clinical-intake-shanghai.trycloudflare.com/api/';
 axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
 
 // Перехватчик запросов для добавления токена

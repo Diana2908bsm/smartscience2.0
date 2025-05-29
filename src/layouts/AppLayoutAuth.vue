@@ -9,7 +9,9 @@ import { manyIcon } from '@/components/icons'
           <many-icon name="emailIcon"></many-icon>
           <slot name="name"></slot>
         </div>
-        <slot name="title" class="auth__title"></slot>
+        <div class="auth__title">
+          <slot name="title"></slot>
+        </div>
       </div>
       <slot name="form"></slot>
     </div>
