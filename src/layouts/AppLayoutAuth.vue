@@ -6,7 +6,7 @@ import { manyIcon } from '@/components/icons'
     <div class="auth__wrapper">
       <div class="auth__header">
         <div class="auth__logo">
-          <many-icon name="emailIcon"></many-icon>
+          <many-icon name="mainLogo"></many-icon>
           <slot name="name"></slot>
         </div>
         <div class="auth__title">
