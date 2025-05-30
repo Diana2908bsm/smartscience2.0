@@ -14,7 +14,6 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         async login(email) {
-            console.log(email)
             this.loading = true;
             try {
                 const response = await axios.get('auth/verifyuser', { params: { email } })
@@ -31,6 +30,19 @@ export const useAuthStore = defineStore('auth', {
             } finally {
                 this.loading = false;
             }
+        },
+        async password(password){
+            console.log(password)
+            this.loading = true
+            try{
+                const response = await axios.get('auth/login',{params: {password}})
+                console.log(response)
+            } catch (error) {
+                this.errorMessage = error.response?.data?.message || 'Ошибка при регистрации'
+            } finally{
+                this.loading = false
+            }
+
         }
     }
 })

@@ -6,6 +6,7 @@ import { useAuthStore } from '@/stores/auth';
 
 const useAuth = useAuthStore()
 const password = ref('')
+const email = ref('')
 const is_eye_opened = ref(false)
 const error = ref(false)
 
@@ -20,7 +21,7 @@ const toggle_eye = () => {
 }
 const inputType = computed(() => is_eye_opened.value ? 'text' : 'password')
 const submitVerifyPassword = async () => {
-
+  useAuth.password(password.value)
 }
 </script>
 <template>
