@@ -5,7 +5,7 @@ import axios from "@/api";
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         needToActivate: null,
-        email: '',
+        email: localStorage.getItem('email') || '',
         userId: '',
         refreshToken: '',
         token: '',
@@ -32,11 +32,18 @@ export const useAuthStore = defineStore('auth', {
             }
         },
         async password(password){
-            console.log(password)
             this.loading = true
             try{
-                const response = await axios.get('auth/login',{params: {password}})
-                console.log(response)
+                const response = await axios.post('auth/login', {  
+                    password,
+                    email: this.email
+                })
+                const {tokenInfo, userId} = response.data
+                console.log(tokenInfo.token)
+                this.token = tokenInfo.token
+                this.refreshToken = tokenInfo.refreshToken
+                this.userId = userId
+                // router.push('/');
             } catch (error) {
                 this.errorMessage = error.response?.data?.message || 'Ошибка при регистрации'
             } finally{
