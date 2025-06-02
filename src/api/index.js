@@ -4,12 +4,15 @@ import { useAuthStore } from '@/stores/auth';
 
 axios.defaults.baseURL = 'https://pairs-lap-cases-instructor.trycloudflare.com/api/';
 // axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
-axios.interceptors.request.use((config)=>{
+axios.interceptors.request.use((config) => {
     const authStore = useAuthStore()
     let params = new URLSearchParams()
-    params.append('auth',authStore.userId)
-    config.params = params 
-    return params
+    if (authStore.userId) {
+        console.log(authStore.userId)
+        params.append('auth', authStore.userId)
+        config.params = params
+    }
+    return config
 })
 
 

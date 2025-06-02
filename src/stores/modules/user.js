@@ -3,7 +3,7 @@ import router from '@/router'
 export default {
     state: {
         user: {},
-        userId: localStorage.getItem('userId') || '',
+        userId:'',
         userType: null,
         loading: false
 

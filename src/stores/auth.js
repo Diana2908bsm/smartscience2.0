@@ -20,6 +20,7 @@ export const useAuthStore = defineStore('auth', {
 
                 this.needToActivate = response.data.needToActivate
                 this.email = email;
+                localStorage.setItem('email', email)
                 if (this.needToActivate) {
                     router.push('/create-password')
                 } else {
@@ -31,22 +32,27 @@ export const useAuthStore = defineStore('auth', {
                 this.loading = false;
             }
         },
-        async password(password){
+        async password(password) {
             this.loading = true
-            try{
-                const response = await axios.post('auth/login', {  
+            try {
+                const response = await axios.post('auth/login', {
                     password,
                     email: this.email
                 })
-                const {tokenInfo, userId} = response.data
+                const { tokenInfo, userId } = response.data
                 console.log(tokenInfo.token)
                 this.token = tokenInfo.token
                 this.refreshToken = tokenInfo.refreshToken
                 this.userId = userId
-                // router.push('/');
+                localStorage.setItem('userInfo', JSON.stringify({
+                    token: this.token,
+                    refreshToken: this.refreshToken,
+                    userId: this.userId
+                }))
+                router.push('/');
             } catch (error) {
                 this.errorMessage = error.response?.data?.message || 'Ошибка при регистрации'
-            } finally{
+            } finally {
                 this.loading = false
             }
 
