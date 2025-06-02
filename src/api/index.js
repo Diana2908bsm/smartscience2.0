@@ -1,17 +1,17 @@
 import axios from 'axios'
+import { useAuthStore } from '@/stores/auth';
 // import store from '../stores';
 
-axios.defaults.baseURL = 'https://retro-fiber-ya-bingo.trycloudflare.com/api/';
+axios.defaults.baseURL = 'https://pairs-lap-cases-instructor.trycloudflare.com/api/';
 // axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
+axios.interceptors.request.use((config)=>{
+    const authStore = useAuthStore()
+    let params = new URLSearchParams()
+    params.append('auth',authStore.userId)
+    config.params = params 
+    return params
+})
 
-// // Перехватчик запросов для добавления токена
-// axios.interceptors.request.use(config => {
-//   const token = store.getters['auth/token'];
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-//   return config;
-// }, error => Promise.reject(error));
 
 // // Перехватчик ответов для обработки ошибок 401
 // axios.interceptors.response.use(
