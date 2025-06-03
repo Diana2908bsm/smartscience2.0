@@ -3,7 +3,7 @@
     <div class="info__container">
       <div class="info__header">
         <div class="info__header--name">
-          {{ firstName}} {{ lastName}} {{ middleName}}
+          {{ userInfo.firstName}} {{ userInfo.lastName}} {{ userInfo.middleName}}
         </div>
         <div class="info__edit">
           <button>Редактировать</button>
@@ -12,15 +12,15 @@
       <div class="info__list">
         <div class="info__item">
           <div class="info__name">Email:</div>
-          <div class="info__title">{{ email }}</div>
+          <div class="info__title">{{ userInfo.email }}</div>
         </div>
         <div class="info__item">
           <div class="info__name">ElibraryId:</div>
-          <div class="info__title">{{ elibraryId }}</div>
+          <div class="info__title">{{ userInfo.elibraryId }}</div>
         </div>
         <div class="info__item">
           <div class="info__name">Дата рождения:</div>
-          <div class="info__title">{{ birthdate }}</div>
+          <div class="info__title">{{ userInfo.birthdate }}</div>
         </div>
       </div>
     </div>
@@ -30,11 +30,6 @@
 
 <script setup>
 const props = defineProps({
-  firstName:String,
-  lastName:String,
-  middleName: String,
-  email:String,
-  elibraryId: Number,
-  birthdate:String
+  userInfo:Object
 })
 </script>
