@@ -28,7 +28,7 @@ onMounted(async()=>{
         </div>
         <div class="header__item">
           <many-icon name="headerPerson"></many-icon>
-          <div v-if="user">
+          <div>
             <div class="header__person-name">{{ userStore.userInfo.firstName }} {{ userStore.userInfo.lastName }}</div>
           </div>
           <div class="header__enter">

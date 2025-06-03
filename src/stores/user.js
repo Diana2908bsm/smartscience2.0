@@ -11,7 +11,7 @@ export const useUserStore = defineStore ('user',{
             this.loading = true
             try{
             const response = await axios.get('users/get')
-            this.userInfo = response.data
+            this.userInfo = response.data.data
             } catch (err){
                 console.log(err)
             } finally{
