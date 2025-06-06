@@ -56,6 +56,13 @@ export const useAuthStore = defineStore('auth', {
                 this.loading = false
             }
 
+        }, logout(){
+        this.email = '',
+        this.userId = '',
+        this.refreshToken = '',
+        this.token = ''
+        localStorage.removeItem('userInfo')
+        router.push('/login');
         }
     }
 })

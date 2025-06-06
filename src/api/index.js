@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth';
 
-axios.defaults.baseURL = 'https://gotta-shift-hydrogen-gui.trycloudflare.com/api/';
-// axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
+axios.defaults.baseURL = 'https://smartsciencebackendtest.loca.lt/api/';
 //Добавляет к каждому запросу userId
 axios.interceptors.request.use((config) => {
   if (!config.url.includes('auth/verifyuser') && !config.url.includes('auth/login') && !config.url.includes('auth/activate') && !config.url.includes('auth/refreshtoken')) {
@@ -36,6 +35,7 @@ axios.interceptors.response.use((response) => {
       authStore.token = newTokens.data.token
     } catch (err) {
       console.log(err)
+      authStore.logout()
     }
   }
 })

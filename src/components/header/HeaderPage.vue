@@ -1,22 +1,21 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { manyIcon } from '../icons'
 import UiBurger from '../UI/uiBurger.vue'
 import Navbar from '@/components/NavBar/NavBar.vue'
 import { useUserStore } from '@/stores/user'
+import { useAuthStore } from '@/stores/auth'
 
 const userStore = useUserStore()
+const useAuth = useAuthStore()
+
 const isMenuOpen = ref(false)
 const toggleMenu = ()=>{
   isMenuOpen.value = !isMenuOpen.value
 }
 const logout = () => {
-  userStore.logout()
+  useAuth.logout()
 }
-
-onMounted(async()=>{
-  await userStore.getInfo()
-})
 </script>
 <template>
   <header class="header">
