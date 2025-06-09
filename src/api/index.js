@@ -1,9 +1,9 @@
 import axios from 'axios'
 import store from '../stores';
 
-axios.defaults.baseURL = 'https://pairs-lap-cases-instructor.trycloudflare.com/api/';
+axios.defaults.baseURL = 'https://smartsciencebackendtest.loca.lt/api/';
 axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
-
+axios.defaults.headers.common['bypass-tunnel-reminder'] = 'true';
 // Перехватчик запросов для добавления токена
 axios.interceptors.request.use(config => {
   const token = store.getters['auth/token'];
