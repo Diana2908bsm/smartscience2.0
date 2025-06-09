@@ -57,11 +57,11 @@ export const useAuthStore = defineStore('auth', {
             }
 
         },
-        async createPassword(password) {
+        async createPassword(newPassword) {
             this.loading = true
             try {
                 const response = await axios.post('auth/activate', {
-                    password,
+                    newPassword,
                     email: this.email
                 })
                 router.push('/login');

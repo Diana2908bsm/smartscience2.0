@@ -7,8 +7,8 @@ import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';
 
 const useUserInfo = useUserStore()
-onMounted(()=>{
-  useUserInfo.getInfo()
+onMounted( async()=>{
+  await useUserInfo.getInfo()
 })
 </script>
 <template>
