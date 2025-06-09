@@ -32,7 +32,7 @@ axios.interceptors.response.use((response) => {
         refreshToken: JSON.parse(localStorage.getItem('userInfo')).refreshToken,
         jwtToken: JSON.parse(localStorage.getItem('userInfo')).token
       })
-      authStore.token = newTokens.data.token
+      authStore.token = newTokens.token
     } catch (err) {
       console.log(err)
       authStore.logout()

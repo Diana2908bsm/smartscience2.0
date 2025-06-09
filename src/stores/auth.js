@@ -56,13 +56,30 @@ export const useAuthStore = defineStore('auth', {
                 this.loading = false
             }
 
-        }, logout(){
-        this.email = '',
-        this.userId = '',
-        this.refreshToken = '',
-        this.token = ''
-        localStorage.removeItem('userInfo')
-        router.push('/login');
+        },
+        async createPassword(password) {
+            this.loading = true
+            try {
+                const response = await axios.post('auth/activate', {
+                    password,
+                    email: this.email
+                })
+                router.push('/login');
+            } catch {
+                this.errorMessage = error.response?.data?.message || 'Ошибка при регистрации'
+            }
+            finally{
+                this.loading = false
+            }
+
+        },
+        logout() {
+            this.email = '',
+                this.userId = '',
+                this.refreshToken = '',
+                this.token = ''
+            localStorage.removeItem('userInfo')
+            router.push('/login');
         }
     }
 })
