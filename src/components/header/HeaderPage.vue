@@ -1,5 +1,5 @@
 <script setup>
-import { ref,onMounted } from 'vue'
+import { ref } from 'vue'
 import { manyIcon } from '../icons'
 import UiBurger from '../UI/uiBurger.vue'
 import Navbar from '@/components/NavBar/NavBar.vue'
@@ -16,9 +16,6 @@ const toggleMenu = ()=>{
 const logout = () => {
   useAuth.logout()
 }
-onMounted(()=>{
-  userStore.getInfo()
-})
 </script>
 <template>
   <header class="header">

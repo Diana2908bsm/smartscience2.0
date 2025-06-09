@@ -4,7 +4,7 @@ import axios from "@/api";
 export const useUserStore = defineStore ('user',{
     state: ()=> ({
         loading:false,
-        userInfo: null
+        userInfo: []
     }),
     actions:{
         async getInfo(){
