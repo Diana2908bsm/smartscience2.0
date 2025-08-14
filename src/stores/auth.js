@@ -40,7 +40,6 @@ export const useAuthStore = defineStore('auth', {
                     email: this.email
                 })
                 const { tokenInfo, userId } = response.data
-                console.log(tokenInfo.token)
                 this.token = tokenInfo.token
                 this.refreshToken = tokenInfo.refreshToken
                 this.userId = userId

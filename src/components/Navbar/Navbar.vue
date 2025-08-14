@@ -17,7 +17,7 @@ export default {
   filteredLinks () {
       const links = [
         { title: 'Профиль', url: '/', exact: true },
-        { title: 'Научные работы', url: '/works' },
+        { title: 'Научные работы', url: '/publications' },
         { title: 'Общие показатели', url: '/indicators' }
         // { title: 'Результаты интеллектуальной деятельности', url: '/intellectual-activity' },
         // { title: 'Справочник', url: '/directory', requiredUserType: [2, 3] },

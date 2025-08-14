@@ -6,13 +6,11 @@ axios.defaults.baseURL = 'https://smartsciencebackendtest.loca.lt/api/';
 axios.interceptors.request.use((config) => {
   if (!config.url.includes('auth/verifyuser') && !config.url.includes('auth/login') && !config.url.includes('auth/activate') && !config.url.includes('auth/refreshtoken')) {
     const authStore = useAuthStore()
-    let params = new URLSearchParams()
-    if (authStore.userId) {
+    const userId = authStore.userId;
+    if (userId && !config.url.includes(userId)) {
       const baseUrl = config.url.replace(/\/$/, '');
-      config.url = `${baseUrl}/${authStore.userId}`;
-    }
-    if (authStore.token) {
-      config.headers['Authorization'] = `Bearer ${authStore.token}`
+      config.url = `${baseUrl}/${userId}`;
+      config.headers.Authorization = `Bearer ${authStore.token}`;
     }
 
   }
@@ -32,7 +30,14 @@ axios.interceptors.response.use((response) => {
         refreshToken: JSON.parse(localStorage.getItem('userInfo')).refreshToken,
         jwtToken: JSON.parse(localStorage.getItem('userInfo')).token
       })
-      authStore.token = newTokens.token
+      authStore.token = newTokens.data
+      localStorage.setItem('userInfo', JSON.stringify({
+        token: authStore.token,
+        refreshToken: authStore.refreshToken,
+        userId: authStore.userId
+      }))
+      originalRequest.headers['Authorization'] = `Bearer ${authStore.token}`;
+      return axios(originalRequest);
     } catch (err) {
       console.log(err)
       authStore.logout()

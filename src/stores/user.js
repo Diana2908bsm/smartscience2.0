@@ -14,6 +14,7 @@ export const useUserStore = defineStore ('user',{
             this.userInfo = response.data.data
             } catch (err){
                 console.log(err)
+                
             } finally{
                 this.loading = false
             }
