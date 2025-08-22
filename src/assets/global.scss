@@ -535,17 +535,21 @@ button[disabled] {
 .navbar {
 	height: 100vh;
 	background: $bg-color;
+
 	&__links {
 		list-style-type: none;
 		margin: 0;
 		padding: 0px 24px 16px 16px;
 	}
+
 	&__item {
 		padding-top: 30px;
+
 		&last-child {
 			padding-bottom: 30px;
 		}
 	}
+
 	&__link {
 		display: inline-flex;
 		width: 100%;
@@ -553,7 +557,37 @@ button[disabled] {
 		font-size: 18px;
 		padding: 6px 0 6px 16px;
 		color: $black-color;
+    cursor: pointer;
+
+		&--dropdown {
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+		}
 	}
+
+	&__submenu {
+	  display: none;
+		margin-top: 0.5rem;
+		transition: all 0.3s ease;
+		&--open {
+		  display: block;
+		}
+	}
+ &__arrow {
+    transition: transform 0.2s ease;
+    margin-left: 10px;
+     
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+  &__submenu-link {
+    display: block;
+    padding: 6px 0 6px 22px;
+    color: #111827;
+    font-size: 14px;  
+  }
 }
 .router-link-exact-active.navbar__link {
 	background: $header-color;

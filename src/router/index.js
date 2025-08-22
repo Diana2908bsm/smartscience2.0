@@ -27,9 +27,15 @@ const router = createRouter({
       meta: { auth: true }
     },
     {
-      path: '/indicators',
+      path: '/indicators/actual',
       name: 'IndicatorsView',
       component: () => import('../views/IndicatorsView.vue'),
+      meta: { auth: true }
+    },
+    {
+      path: '/indicators/years',
+      name: 'IndicatorsYearsView',
+      component: () => import('../views/IndicatorsYearsView.vue'),
       meta: { auth: true }
     },
     {
