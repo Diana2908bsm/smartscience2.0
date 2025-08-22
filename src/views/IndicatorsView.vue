@@ -20,9 +20,10 @@ onMounted(() => {
                 <h1 class="profile">Общие показатели сотрудника</h1>
             </template>
             <template #info>
+                <indicatorsWork :indicators="indicatorsWorkStore.numIndicators" title="Общее число"></indicatorsWork>
                 <indicatorsWork :indicators="indicatorsWorkStore.hirschIndicators" title="Индекс Хирша"></indicatorsWork>
                 <indicatorsWork :indicators="indicatorsWorkStore.citIndicators" title="Цитирование"></indicatorsWork>
-                <indicatorsWork :indicators="indicatorsWorkStore.numIndicators" title="Общее число"></indicatorsWork>
+                <indicatorsWork :indicators="indicatorsWorkStore.publIndicators" title="Публикации"></indicatorsWork>
             </template>
         </AppLayoutProfile>
     </div>

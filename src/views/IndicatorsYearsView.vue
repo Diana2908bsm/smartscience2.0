@@ -20,8 +20,7 @@ onMounted(() => {
                 <h1 class="profile">Общие показатели сотрудника</h1>
             </template>
             <template #info>
-                <MetricsChart :items="indicatorsWorkStore.indicatorsYears" theme="custom"
-                     />
+                <MetricsChart :items="indicatorsWorkStore.indicatorsYears" theme="custom" />
             </template>
         </AppLayoutProfile>
     </div>

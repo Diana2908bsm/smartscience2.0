@@ -68,6 +68,9 @@ export const useIndicatorsStore = defineStore('indicators', {
         },
         numIndicators(state) {
             return state.indicators.filter(i => i.code.toLowerCase().includes('num'))
+        },
+        publIndicators(state) {
+            return state.indicators.filter(i => i.code.toLowerCase().includes('publ'))
         }
     }
 })
