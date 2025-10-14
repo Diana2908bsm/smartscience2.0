@@ -42,12 +42,8 @@ const router = createRouter({
       path: '/create-password',
       name: 'CreatePasswprd',
       component: () => import('../views/CreatePassword.vue')
-    },
-        {
-      path: '/practice',
-      name: 'Practice',
-      component: () => import('../views/Practice.vue')
-    },
+    }
+    
   ],
 })
 

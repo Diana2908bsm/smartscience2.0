@@ -38,7 +38,8 @@ use([
 import components from '@/components/UI'
 const app = createApp(App)
 app.use(createPinia())
-// Регистрация UI компонентов
+
+
 Object.values(components).forEach(component => {
     app.component(component.name, component)
 })
