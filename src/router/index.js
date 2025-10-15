@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import { useAuthStore } from '@/stores/auth';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -8,7 +8,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('@/views/HomeView.vue'),
-      meta: { requiresAuth: true }// для этой страницы необходимо залогиниться
+      meta: { auth: true } // для этой страницы необходимо залогиниться
     },
     {
       path: '/login',
@@ -21,28 +21,39 @@ const router = createRouter({
       component: () => import('@/views/VerifyPassword.vue')
     },
     {
-      path: '/works',
-      name: 'WorksView',
-      component: () => import('../views/WorksView.vue')
+      path: '/publications',
+      name: 'Publications',
+      component: () => import('../views/PublicationsView.vue'),
+      meta: { auth: true }
     },
     {
-      path: '/indicators',
+      path: '/indicators/actual',
       name: 'IndicatorsView',
-      component: () => import('../views/IndicatorsView.vue')
+      component: () => import('../views/IndicatorsView.vue'),
+      meta: { auth: true }
+    },
+    {
+      path: '/indicators/years',
+      name: 'IndicatorsYearsView',
+      component: () => import('../views/IndicatorsYearsView.vue'),
+      meta: { auth: true }
     },
     {
       path: '/create-password',
       name: 'CreatePasswprd',
       component: () => import('../views/CreatePassword.vue')
-    },
+    }
+    
   ],
 })
+
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('token'); 
-  if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) { 
-    next('/login'); 
-  } else {
-    next();
+  const authStore = useAuthStore()
+  if (to.meta.auth && !authStore.token){
+    next('/login')
+  }
+  else {
+     next();
   }
 });
 export default router

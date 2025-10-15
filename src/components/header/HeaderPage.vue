@@ -1,3 +1,22 @@
+<script setup>
+import { ref } from 'vue'
+import { manyIcon } from '../icons'
+import UiBurger from '../UI/uiBurger.vue'
+import Navbar from '@/components/NavBar/NavBar.vue'
+import { useUserStore } from '@/stores/user'
+import { useAuthStore } from '@/stores/auth'
+
+const userStore = useUserStore()
+const useAuth = useAuthStore()
+
+const isMenuOpen = ref(false)
+const toggleMenu = ()=>{
+  isMenuOpen.value = !isMenuOpen.value
+}
+const logout = () => {
+  useAuth.logout()
+}
+</script>
 <template>
   <header class="header">
     <div class="header__container">
@@ -8,8 +27,8 @@
         </div>
         <div class="header__item">
           <many-icon name="headerPerson"></many-icon>
-          <div v-if="user">
-            <div class="header__person-name">{{ user.firstName }} {{ user.lastName }}</div>
+          <div>
+            <div class="header__person-name">{{ userStore.userInfo.firstName }} {{ userStore.userInfo.lastName }}</div>
           </div>
           <div class="header__enter">
             <many-icon @click="logout" name="enterIcons"></many-icon>
@@ -23,36 +42,3 @@
     </div>
   </header>
 </template>
-<script>
-import { manyIcon } from '../icons'
-import { mapGetters, mapActions } from 'vuex'
-import UiBurger from '../UI/uiBurger.vue'
-import Navbar from '@/components/NavBar/NavBar.vue'
-
-export default {
-  name: 'headerPages',
-  components: {
-    manyIcon,
-    UiBurger,
-    Navbar
-  },
-  data (){
-    return {
-      isMenuOpen : false
-    }
-  },
-  computed: {
-    ...mapGetters(['user'])
-  },
-  mounted() {
-    this.getInfo()
-  },
-  methods: {
-    ...mapActions(['getInfo']),
-    ...mapActions('login', ['logout']),
-    toggleMenu () {
-      this.isMenuOpen = !this.isMenuOpen
-    }
-  }
-}
-</script>

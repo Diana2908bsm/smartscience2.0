@@ -320,6 +320,7 @@ button[disabled] {
 		justify-content: center;
 		gap: 10px;
 		span {
+			font-size: 14px;
 		}
 		svg {
 			width: 24px;
@@ -452,6 +453,8 @@ button[disabled] {
 	&__grid {
 		display: grid;
 		grid-template-columns: 300px 1fr;
+		height: 90vh;
+		overflow: hidden;
 	}
 	&__grid--work {
 		grid-template-columns: 300px 1fr 250px;
@@ -532,19 +535,23 @@ button[disabled] {
 }
 // --------------navbar-----------------------
 .navbar {
-	height: 100vh;
+	height: 100%;
 	background: $bg-color;
+
 	&__links {
 		list-style-type: none;
 		margin: 0;
 		padding: 0px 24px 16px 16px;
 	}
+
 	&__item {
 		padding-top: 30px;
+
 		&last-child {
 			padding-bottom: 30px;
 		}
 	}
+
 	&__link {
 		display: inline-flex;
 		width: 100%;
@@ -552,7 +559,37 @@ button[disabled] {
 		font-size: 18px;
 		padding: 6px 0 6px 16px;
 		color: $black-color;
+    cursor: pointer;
+
+		&--dropdown {
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+		}
 	}
+
+	&__submenu {
+	  display: none;
+		margin-top: 0.5rem;
+		transition: all 0.3s ease;
+		&--open {
+		  display: block;
+		}
+	}
+ &__arrow {
+    transition: transform 0.2s ease;
+    margin-left: 10px;
+     
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+  &__submenu-link {
+    display: block;
+    padding: 6px 0 6px 22px;
+    color: #111827;
+    font-size: 14px;  
+  }
 }
 .router-link-exact-active.navbar__link {
 	background: $header-color;
@@ -564,6 +601,8 @@ button[disabled] {
 }
 // ----------------profile--------------------------
 .profile {
+	overflow-y: auto;
+    height: 100%;
 	&__container {
 		padding: 20px 16px 0 28px;
 	}
@@ -727,13 +766,13 @@ button[disabled] {
 			border-color: #888;
 		}
 	}
-	&__box--label{
+	&__box--label {
 		display: flex;
 		align-items: center;
 		gap: 10px;
 		font-size: 13px;
 	}
-	&__box--checkbox{
+	&__box--checkbox {
 		padding-bottom: 5px;
 	}
 }
@@ -957,6 +996,36 @@ button[disabled] {
 	}
 }
 .grid-filter {
-	grid-template-columns: 220px 1fr 250px;
+	display: grid;
+	grid-template-columns: 1fr 250px;
 }
 // -------------fa-icons---------------------------------
+// -------------indicators-------------------------------
+.indicators {
+}
+.indicator {
+	&__box {
+		background: #f3f5f7;
+		padding: 10px;
+		margin: 20px 0;
+		border-radius: 10px;
+		box-shadow: 0 7px 4px 0 rgba(0, 0, 0, 0.1);
+	}
+	&__title {
+		font-size: 20px;
+		padding-bottom: 10px;
+		border-bottom: 2px solid #D8D8D8;
+	}
+	&__list {
+		display: flex;
+		justify-content: space-between;
+		gap: 5px;
+		font-size: 15px;
+		margin-bottom: 5px;
+	}
+	&__name {
+	}
+	&__number {
+		color: #3e5efc;
+	}
+}

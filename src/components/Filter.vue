@@ -21,17 +21,17 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
-
 <script setup>
 import { ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { usePublicationsStore} from '@/stores/publications';
 import uiInput from './UI/uiInput.vue'
 import { debounce } from 'lodash'
 
-const store = useStore()
+const PublicationsStore = usePublicationsStore()
 const route = useRoute()
 const router = useRouter()
 const filters = ref ({
@@ -49,7 +49,7 @@ onMounted(()=>{
 watch (filters, ()=> {
     router.replace({
         query:{
-            search: filters.value.searchArticles || undefined,
+            search: filters.value.searchArticles || '',
             years: filters.value.selectedYears.length ? filters.value.selectedYears.join(',') : undefined
         }
     })
@@ -57,11 +57,11 @@ watch (filters, ()=> {
 }, { deep: true })
 
 const publicationYears = computed(() => {
-    const years = store.getters.works.map(w => w.year);
+    const years = PublicationsStore.publications.map(w => w.year);
     return [...new Set(years)].sort((a, b) => a - b);
 })
 const fetchFilteredData = debounce (()=> {
-    store.dispatch('filterArticles',{
+   PublicationsStore.filterArticles({
         title: filters.value.searchArticles,
         years: filters.value.selectedYears
     })

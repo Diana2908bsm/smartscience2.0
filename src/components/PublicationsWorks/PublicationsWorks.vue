@@ -1,10 +1,18 @@
+<script setup>
+const props = defineProps({
+  publications: {
+    type: Object,
+    default: () => ({})
+  }
+})
+</script>
 <template>
   <div class="publications">
     <div class="publications__length"> Найдено: {{ publications.length }} статей</div>
     <div class="publications__inner">
       <div v-if="!publications.length">
-      <p>Статей не найдено</p>
-    </div>
+        <p>Статей не найдено</p>
+      </div>
       <div class="publications__box" v-for="publication in publications" :key="publication.id">
         <div class="publications__title">{{ publication.title }}</div>
         <div class="publications__author">{{ publication.author }}</div>
@@ -14,14 +22,3 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'PublicationsWorks',
-  props: {
-    publications: {
-      type: Object,
-      default: () => ({})
-    }
-  }
-}
-</script>

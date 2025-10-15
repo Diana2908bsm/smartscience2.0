@@ -1,41 +1,48 @@
 import axios from 'axios'
-import store from '../stores';
+import { useAuthStore } from '@/stores/auth';
 
 axios.defaults.baseURL = 'https://smartsciencebackendtest.loca.lt/api/';
-axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
-axios.defaults.headers.common['bypass-tunnel-reminder'] = 'true';
-// Перехватчик запросов для добавления токена
-axios.interceptors.request.use(config => {
-  const token = store.getters['auth/token'];
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-}, error => Promise.reject(error));
-
-// Перехватчик ответов для обработки ошибок 401
-axios.interceptors.response.use(
-  response => response,
-  async error => {
-    const originalRequest = error.config;
-
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      try {
-        await store.dispatch('login/refreshTokens');
-        const newToken = store.getters['login/token'];
-        console.log('Новый токен:', newToken);
-        originalRequest.headers.Authorization = `Bearer ${newToken}`;
-        return axios(originalRequest);
-      } catch (refreshError) {
-        console.error('Не удалось обновить токен:', refreshError);
-        return Promise.reject(refreshError);
-      }
+//Добавляет к каждому запросу userId
+axios.interceptors.request.use((config) => {
+  if (!config.url.includes('auth/verifyuser') && !config.url.includes('auth/login') && !config.url.includes('auth/activate') && !config.url.includes('auth/refreshtoken')) {
+    const authStore = useAuthStore()
+    const userId = authStore.userId;
+    if (userId && !config.url.includes(userId)) {
+      const baseUrl = config.url.replace(/\/$/, '');
+      config.url = `${baseUrl}/${userId}`;
+      config.headers.Authorization = `Bearer ${authStore.token}`;
     }
-
-    return Promise.reject(error);
   }
-);
+  return config
+})
+axios.defaults.headers.common['bypass-tunnel-reminder'] = 'true';
+axios.interceptors.response.use((response) => {
+
+  return response
+}, async function (error) {
+  const authStore = useAuthStore()
+  const originalRequest = error.config
+  if (error.response.status === 401 && !originalRequest._retry) {
+    originalRequest._retry = true
+    try {
+      const newTokens = await axios.post(`auth/refreshtoken`, {
+        refreshToken: JSON.parse(localStorage.getItem('userInfo')).refreshToken,
+        jwtToken: JSON.parse(localStorage.getItem('userInfo')).token
+      })
+      authStore.token = newTokens.data
+      localStorage.setItem('userInfo', JSON.stringify({
+        token: authStore.token,
+        refreshToken: authStore.refreshToken,
+        userId: authStore.userId
+      }))
+      originalRequest.headers['Authorization'] = `Bearer ${authStore.token}`;
+      return axios(originalRequest);
+    } catch (err) {
+      console.log(err)
+      authStore.logout()
+    }
+  }
+})
+
 
 export default axios;
