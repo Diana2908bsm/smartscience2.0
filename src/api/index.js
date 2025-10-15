@@ -12,7 +12,6 @@ axios.interceptors.request.use((config) => {
       config.url = `${baseUrl}/${userId}`;
       config.headers.Authorization = `Bearer ${authStore.token}`;
     }
-
   }
   return config
 })
