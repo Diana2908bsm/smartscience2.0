@@ -39,31 +39,32 @@ const filters = ref ({
     selectedYears: []
 })
 
+const publicationYears = computed(() => {
+    const years = PublicationsStore.publications.map(w => w.year);
+    return [...new Set(years)].sort((a, b) => a - b);
+})
+const selectedYearsString = computed(() =>
+  filters.value.selectedYears.join(',')
+)
 onMounted(()=>{
-    const { search, years } = route.query // Извлекаются параметры из url
+    const { search, years } = route.query 
     filters.value.searchArticles = search || ''
-    filters.value.selectedYears =  years ? years.split(',').map(Number) : []
+    filters.value.selectedYears = years ? years.split(',') : [];
     fetchFilteredData()
 })
 
 watch (filters, ()=> {
     router.replace({
         query:{
-            search: filters.value.searchArticles || '',
-            years: filters.value.selectedYears.length ? filters.value.selectedYears.join(',') : undefined
+            search: filters.value.searchArticles || undefined,
+            years: filters.value.selectedYears.length ? selectedYearsString.value : undefined
         }
     })
     fetchFilteredData()
 }, { deep: true })
 
-const publicationYears = computed(() => {
-    const years = PublicationsStore.publications.map(w => w.year);
-    return [...new Set(years)].sort((a, b) => a - b);
-})
+
 const fetchFilteredData = debounce (()=> {
-   PublicationsStore.filterArticles({
-        title: filters.value.searchArticles,
-        years: filters.value.selectedYears
-    })
+   PublicationsStore.filterArticles(filters.value.searchArticles,selectedYearsString.value)
 },500)
 </script>

@@ -22,10 +22,11 @@ export const usePublicationsStore = defineStore('publications', {
             try {
                 const data = await axios.get('publications/get', {
                     params: {
-                        Title: title,
-                        Years: years.join(',')
+                     title,
+                     years
                     }
                 })
+                this.publications = data.data.data
             } catch (err) {
                 console.log(err)
             }
