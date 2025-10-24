@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth';
 
-axios.defaults.baseURL = 'https://smartsciencebackendtest.loca.lt/api/';
+let baseUrl = process.env.NODE_ENV === 'development' ? 'https://localhost:7236/api' : 'https://smartsciencebackendtest.loca.lt/api/';
+
+axios.defaults.baseURL = baseUrl;
 //Добавляет к каждому запросу userId
 axios.interceptors.request.use((config) => {
   if (!config.url.includes('auth/verifyuser') && !config.url.includes('auth/login') && !config.url.includes('auth/activate') && !config.url.includes('auth/refreshtoken')) {

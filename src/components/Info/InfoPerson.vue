@@ -1,3 +1,8 @@
+<script setup>
+const props = defineProps({
+  userInfo:Object
+})
+</script>
 <template>
   <div class="info">
     <div class="info__container">
@@ -22,14 +27,17 @@
           <div class="info__name">Дата рождения:</div>
           <div class="info__title">{{ userInfo.birthdate }}</div>
         </div>
+        <div class="info__item">
+          <div class="info__name">Факультет (Институт):</div>
+          <div class="info__title">{{ userInfo.structuralUnit.facultyName }}</div>
+        </div>
+        <div class="info__item">
+          <div class="info__name">Кафедра:</div>
+          <div class="info__title">{{ userInfo.structuralUnit.departmentName }} ({{ userInfo.structuralUnit.facultyShortName }})</div>
+        </div>
       </div>
     </div>
   </div>
   
 </template>
 
-<script setup>
-const props = defineProps({
-  userInfo:Object
-})
-</script>
