@@ -8,7 +8,7 @@ const props = defineProps({
     <div class="info__container">
       <div class="info__header">
         <div class="info__header--name">
-          {{ userInfo.firstName}} {{ userInfo.lastName}} {{ userInfo.middleName}}
+          {{ userInfo.firstName}} {{ userInfo.lastName}} {{ userInfo?.middleName}}
         </div>
         <div class="info__edit">
           <button>Редактировать</button>
@@ -21,7 +21,7 @@ const props = defineProps({
         </div>
         <div class="info__item">
           <div class="info__name">ElibraryId:</div>
-          <div class="info__title">{{ userInfo.elibraryId }}</div>
+          <div class="info__title">{{ userInfo?.elibraryId }}</div>
         </div>
         <div class="info__item">
           <div class="info__name">Дата рождения:</div>
@@ -33,7 +33,7 @@ const props = defineProps({
         </div>
         <div class="info__item">
           <div class="info__name">Кафедра:</div>
-          <div class="info__title">{{ userInfo.structuralUnit.departmentName }} ({{ userInfo.structuralUnit.facultyShortName }})</div>
+          <div class="info__title">{{ userInfo.structuralUnit.departmentName }} ({{ userInfo.structuralUnit?.facultyShortName }})</div>
         </div>
       </div>
     </div>
