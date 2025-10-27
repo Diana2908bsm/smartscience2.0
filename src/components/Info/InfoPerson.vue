@@ -29,11 +29,14 @@ const props = defineProps({
         </div>
         <div class="info__item">
           <div class="info__name">Факультет (Институт):</div>
-          <div class="info__title">{{ userInfo.structuralUnit.facultyName }}</div>
+          <div class="info__title">{{ userInfo.structuralUnit?.facultyName }}</div>
         </div>
         <div class="info__item">
           <div class="info__name">Кафедра:</div>
-          <div class="info__title">{{ userInfo.structuralUnit.departmentName }} ({{ userInfo.structuralUnit?.facultyShortName }})</div>
+          <div class="info__title">{{ userInfo.structuralUnit?.departmentName }} 
+            <span v-if="userInfo.structuralUnit?.facultyShortName">({{ userInfo.structuralUnit?.facultyShortName }})
+            </span> 
+          </div>
         </div>
       </div>
     </div>
