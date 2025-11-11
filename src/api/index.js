@@ -1,12 +1,21 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth';
 
-let baseUrl = process.env.NODE_ENV === 'development' ? 'https://localhost:7236/api' : 'https://smartsciencebackendtest.loca.lt/api/';
+let baseUrl = 'https://smartsciencebackendtest.loca.lt/api/';
 
 axios.defaults.baseURL = baseUrl;
+
+const EXCLUDED_URLS = [
+  'auth/verifyuser',
+  'auth/login',
+  'auth/activate',
+  'auth/refreshtoken',
+  'faculties'
+];
 //Добавляет к каждому запросу userId
 axios.interceptors.request.use((config) => {
-  if (!config.url.includes('auth/verifyuser') && !config.url.includes('auth/login') && !config.url.includes('auth/activate') && !config.url.includes('auth/refreshtoken')) {
+    const isExcluded = EXCLUDED_URLS.some(url => config.url.includes(url));
+  if (!isExcluded) {
     const authStore = useAuthStore()
     const userId = authStore.userId;
     if (userId && !config.url.includes(userId)) {

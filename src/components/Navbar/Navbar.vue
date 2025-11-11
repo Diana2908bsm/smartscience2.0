@@ -11,7 +11,8 @@ const links = ref([
       { title: "Актуальные показатели", url: "/indicators/actual" },
       { title: "Показатели по годам", url: "/indicators/years" }
     ]
-  }
+  },
+  {title: 'Справочник', url:'/faculties'}
   // { title: 'Результаты интеллектуальной деятельности', url: '/intellectual-activity' },
   // { title: 'Справочник', url: '/directory', requiredUserType: [2, 3] },
   // { title: 'Admin', url: '/admin', requiredUserType: [2, 3] }

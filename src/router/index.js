@@ -40,20 +40,25 @@ const router = createRouter({
     },
     {
       path: '/create-password',
-      name: 'CreatePasswprd',
+      name: 'CreatePassword',
       component: () => import('../views/CreatePassword.vue')
+    },
+    {
+      path: '/faculties',
+      name: 'Faculties',
+      component: () => import('../views/Faculties.vue')
     }
-    
+
   ],
 })
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  if (to.meta.auth && !authStore.token){
+  if (to.meta.auth && !authStore.token) {
     next('/login')
   }
   else {
-     next();
+    next();
   }
 });
 export default router
