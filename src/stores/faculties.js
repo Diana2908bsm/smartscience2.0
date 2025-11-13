@@ -48,16 +48,20 @@ export const useFacultiesStore = defineStore('faculties', {
                 this.loading = false
             }
         },
-        async updateFaculties( payload) {
-            console.log(payload)
-            this.loading = true
-       
+        async updateFaculties(payload) {
             try {
                 const response = await axios.put(`faculties`, payload)
-                // const index = this.faculties.findIndex(f => f.facultyId === id)
-                // if (index !== -1) {
-                //     this.faculties[index] = response.data
-                // }
+                const index = this.faculties.findIndex(f => f.facultyId === payload.facultyId)
+                if (index !== -1) {
+                    const cleanedDepartments = (payload.departments || []).filter(dep => !dep.isDeleted)
+                    this.faculties[index] = {
+                        ...this.faculties[index],
+                        ...payload,
+                        departments: cleanedDepartments
+                    }
+                }
+
+                return response.data
 
             } catch (err) {
                 console.error('Ошибка при изменении факультета:', err)

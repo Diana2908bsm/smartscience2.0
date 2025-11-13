@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { manyIcon } from '@/components/icons';
 import { useFacultiesStore } from '@/stores/faculties';
 
@@ -16,16 +16,35 @@ const closeModal = () => {
     emit('closeModal')
 }
 
-const universityName = ref(props.facultyData?.name || '')
-const universityCode = ref(props.facultyData?.code || '')
-const universityShortname = ref(props.facultyData?.shortName || '')
-const departments = ref(props.facultyData?.departments || [{name: '', code: ''}])
+const universityName = ref('')
+const universityCode = ref('')
+const universityShortname = ref('')
+const departments = ref([{name: '', code: ''}])
 
+watch(()=>props.facultyData,(newData)=>{
+    if (newData) {
+      universityName.value = newData.name || '';
+      universityCode.value = newData.code || '';
+      universityShortname.value = newData.shortName || '';
+      departments.value = JSON.parse(JSON.stringify(newData.departments || [{ name: '', code: '' }]));
+    } else {
+      universityName.value = '';
+      universityCode.value = '';
+      universityShortname.value = '';
+      departments.value = [{ name: '', code: '' }];
+    }
+} , { immediate: true })
 const addDepartment = () =>{
     departments.value.push({name:'',code:''})
 }
 const deleteDepartment = (index) =>{
-    departments.value.splice(index,1)
+    const department = departments.value[index];
+    if (department.facultyLinkId){
+          department.isDeleted = true;
+
+    } else {
+        departments.value.splice(index,1)
+    }    
 }
 
 const submitFormModal = async() =>{
@@ -33,7 +52,10 @@ const submitFormModal = async() =>{
        name:universityName.value,
        shortName: universityShortname.value,
        code: universityCode.value,
-       departments :departments.value
+       departments: departments.value.map(dep => ({
+        ...dep,
+       isDeleted: dep.isDeleted || false
+    }))
     }
     if (props.facultyData) {
         data.facultyId = props.facultyData.facultyId
@@ -69,7 +91,7 @@ const submitFormModal = async() =>{
                 </div>
 
                 <div class="modal__inputs">
-                    <div class="modal__inputs-box" v-for="(department, index) in departments" :key="index">
+                    <div class="modal__inputs-box" v-for="(department, index) in departments.filter(dep => !dep.isDeleted)" :key="index">
                         <div class="modal__input-field">
                             <label for="departments-name" class="modal__label">Название кафедры</label>
                             <ui-input class="modal__input"  v-model="department.name" required />

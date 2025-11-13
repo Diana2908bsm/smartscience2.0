@@ -11,12 +11,15 @@ import { manyIcon } from '@/components/icons';
 const useFacultiesrInfo = useFacultiesStore ()
 
 const isModalOpen = ref(false)
-const modalText = ref('Добавление нового института')
-const modalButton = ref('Добавить')
+const modalText = ref('')
+const modalButton = ref('')
 const selectedFucultry = ref(null)
 
 const openModal = () =>{
     isModalOpen.value = true
+    selectedFucultry.value = null
+    modalText.value = "Добавление нового института"
+    modalButton.value = "Добавить"
 }
 const openEditModal = (faculties) =>{
     isModalOpen.value = true
