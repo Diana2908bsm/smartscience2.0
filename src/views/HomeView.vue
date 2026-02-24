@@ -1,7 +1,7 @@
 <script setup>
 import AppLayoutProfile from '@/layouts/AppLayoutProfile.vue';
 import Spinner from '@/components/UI/spinner/Spinner.vue';
-import InfoPerson from '@/components/Info/InfoPerson.vue';
+import InfoPerson from '@/modules/profile/components/InfoPerson.vue';
 import { manyIcon } from '../components/icons'
 import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';

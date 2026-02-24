@@ -1,10 +1,10 @@
 <script setup>
-import PublicationsWorks from '@/components/PublicationsWorks/PublicationsWorks.vue'
+import PublicationsWorks from '@/modules/publications/components/PublicationsWorks.vue'
 import AppLayoutProfile from '@/layouts/AppLayoutProfile.vue';
 import { usePublicationsStore } from '@/stores/publications'
 import Spinner from '@/components/UI/spinner/Spinner.vue';
 import Filter from '@/components/Filter.vue';
-import { onMounted } from 'vue';
+
 
 const PublicationsStore = usePublicationsStore()
 

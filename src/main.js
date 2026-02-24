@@ -1,17 +1,18 @@
 import './assets/global.scss'
-
+import 'primeicons/primeicons.css'
+import 'font-awesome/css/font-awesome.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router'
 
-import 'font-awesome/css/font-awesome.css';
-
+import PrimeVue from 'primevue/config'
+import ConfirmationService from 'primevue/confirmationservice'
+import { MyCustomPreset } from '@/assets/presets/preset'  // импорт готового пресета
 
 import { use } from 'echarts/core'
-import ECharts from 'vue-echarts' // компонент
+import ECharts from 'vue-echarts'
 import { CanvasRenderer } from 'echarts/renderers'
 import { LineChart, BarChart } from 'echarts/charts'
 import {
@@ -22,7 +23,7 @@ import {
   DataZoomComponent
 } from 'echarts/components'
 
-// включаем только то, что нужно (tree-shaking)
+// tree-shaking для echarts
 use([
   CanvasRenderer,
   LineChart,
@@ -34,17 +35,29 @@ use([
   DataZoomComponent
 ])
 
-// вывод UI компонентов
 import components from '@/components/UI'
+
 const app = createApp(App)
+
 app.use(createPinia())
+app.use(router)
 
-
-Object.values(components).forEach(component => {
-    app.component(component.name, component)
+// PrimeVue с кастомной темой
+app.use(PrimeVue, {
+  ripple: true,
+  theme: {
+    preset: MyCustomPreset
+  }
 })
 
+app.use(ConfirmationService)
 
-app.use(router)
+// Глобальные UI компоненты
+Object.values(components).forEach(component => {
+  app.component(component.name, component)
+})
+
+// ECharts
 app.component('v-chart', ECharts)
+
 app.mount('#app')

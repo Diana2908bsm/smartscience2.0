@@ -1,0 +1,18 @@
+@import './variables.scss';
+@import '~primevue/resources/primevue.min.css'; 
+@import '~primeicons/primeicons.css'; 
+
+.p-button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border-radius: var(--button-border-radius);
+}
+
+.p-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.p-dialog {
+  font-size: var(--font-size);
+  background-color: var(--background-color);
+}

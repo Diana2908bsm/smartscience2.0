@@ -4,7 +4,7 @@ import AppLayoutProfile from '@/layouts/AppLayoutProfile.vue';
 import Spinner from '@/components/UI/spinner/Spinner.vue';
 
 import { useFacultiesStore } from '@/stores/faculties';
-import Faculties from '@/components/Faculties/Faculties.vue';
+import Faculties from '@/modules/faculties/components/Faculties.vue';
 import Modal from '@/components/Modal/Modal.vue';
 import { manyIcon } from '@/components/icons';
 

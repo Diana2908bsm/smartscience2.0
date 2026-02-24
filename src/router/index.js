@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import { useAuthStore } from '@/stores/auth';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/HomeView.vue'),
+      component: () => import('@/modules/profile/view/ProfileView.vue'),
       meta: { auth: true } // для этой страницы необходимо залогиниться
     },
     {
@@ -23,7 +22,7 @@ const router = createRouter({
     {
       path: '/publications',
       name: 'Publications',
-      component: () => import('../views/PublicationsView.vue'),
+      component: () => import('@/modules/publications/view/PublicationView.vue'),
       meta: { auth: true }
     },
     {
@@ -46,7 +45,7 @@ const router = createRouter({
     {
       path: '/faculties',
       name: 'Faculties',
-      component: () => import('../views/Faculties.vue')
+      component: () => import('../modules/faculties/views/FacultiesView.vue')
     }
 
   ],

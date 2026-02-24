@@ -1,7 +1,5 @@
 <script setup>
-import { ref } from 'vue'
 import { manyIcon } from '../icons'
-import UiBurger from '../UI/uiBurger.vue'
 import Navbar from '@/components/NavBar/NavBar.vue'
 import { useUserStore } from '@/stores/user'
 import { useAuthStore } from '@/stores/auth'
