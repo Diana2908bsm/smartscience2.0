@@ -1314,3 +1314,27 @@ button[disabled] {
 	}
 	
 }
+.form__label{
+	font-size: 12px;
+}
+.form-button{
+display: flex;
+gap: 16px;
+justify-content: end;
+}
+.faculty{
+	&__form{
+		display: flex;
+		flex-direction: column;
+		gap:16px;
+		padding: 15px;
+	}
+}
+.form-box{
+	display: flex;
+	gap:16px;
+
+}
+.icon-red .p-button-icon {
+    color: red; 
+}

@@ -9,6 +9,7 @@ import router from './router'
 
 import PrimeVue from 'primevue/config'
 import ConfirmationService from 'primevue/confirmationservice'
+import ToastService from 'primevue/toastservice';
 import { MyCustomPreset } from '@/assets/presets/preset'  // импорт готового пресета
 
 import { use } from 'echarts/core'
@@ -51,6 +52,7 @@ app.use(PrimeVue, {
 })
 
 app.use(ConfirmationService)
+app.use(ToastService);
 
 // Глобальные UI компоненты
 Object.values(components).forEach(component => {
