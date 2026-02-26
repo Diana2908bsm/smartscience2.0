@@ -1,6 +1,5 @@
 <script setup>
 import { manyIcon } from '@/components/icons'
-import { computed, ref } from 'vue';
 
 const openDropdown = ref(null)
 const links = ref([

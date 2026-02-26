@@ -33,6 +33,7 @@ declare module 'vue' {
     PublicationWidget: typeof import('./src/modules/publications/widgets/PublicationWidget.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('primevue/sidebar')['default']
     Spinner: typeof import('./src/components/UI/spinner/Spinner.vue')['default']
     UiBurger: typeof import('./src/components/UI/uiBurger.vue')['default']
     UiButton: typeof import('./src/components/UI/uiButton.vue')['default']
