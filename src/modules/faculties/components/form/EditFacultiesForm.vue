@@ -8,12 +8,14 @@ const props = defineProps({
 
 const emit = defineEmits(['submit'])
 const formData = ref({
+    facultyId: props.faculty.facultyId,
     name: props.faculty.name || '',
     code: props.faculty.code || '',
     shortName: props.faculty.shortName || '',
     departments: props.faculty?.departments
         ? [...props.faculty.departments]
         : []
+
 })
 function onSubmit() {
     emit('submit', formData.value)
@@ -21,12 +23,24 @@ function onSubmit() {
 function addDepartment() {
     formData.value.departments.push({
         name: '',
-        code: ''
+        code: '',
+        facultyLinkId: props.faculty.facultyId,
+        isDeleted: false,
     })
 }
 function removeDepartment(index) {
-    formData.value.departments.splice(index, 1)
+    const department = formData.value.departments[index]
+
+    if (department.id) {
+        department.isDeleted = true
+    } else {
+        formData.value.departments.splice(index, 1)
+    }
+    console.log(formData.value)
 }
+const departmentActual = computed(()=>{
+    return formData.value.departments.filter(item => !item.isDeleted)
+})
 
 </script>
 
@@ -46,7 +60,7 @@ function removeDepartment(index) {
                 <label class="form__label" for="short_name">Сокращенное название</label>
             </FloatLabel>
         </div>
-        <div v-for="(department,index) in formData.departments" :key="department.id" class="form-box">
+        <div v-for="(department, index) in departmentActual" :key="department.id" class="form-box">
             <FloatLabel variant="on">
                 <InputText id="department-name" v-model="department.name" fluid required />
                 <label class="form__label" for="department-name">Название кафедры</label>
@@ -58,8 +72,8 @@ function removeDepartment(index) {
             <Button icon="pi pi-times" class="icon-red" text @click="removeDepartment(index)"></Button>
         </div>
         <div style="display: flex; justify-content: end;">
-            <Button class="button-add-department" @click="addDepartment" icon="pi pi-plus"
-                label="Добавить кафедру"></Button>
+            <Button class="button-add-department" @click="addDepartment" icon="pi pi-plus" label="Добавить кафедру" />
+
         </div>
 
         <div class="form-button">

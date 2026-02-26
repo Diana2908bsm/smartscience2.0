@@ -1317,6 +1317,12 @@ button[disabled] {
 .form__label{
 	font-size: 12px;
 }
+.button-add-department{
+	background: inherit!important;
+	border: none!important;
+	font-size: 14px!important;;
+	color: #0d4cd3!important;
+}
 .form-button{
 display: flex;
 gap: 16px;
